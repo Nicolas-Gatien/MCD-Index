@@ -19,4 +19,4 @@ jobs:
         needs: build
         runs-on: ubuntu-latest
         steps:
-            - run: echo "Deployed!"
+            - run: docker image ls
