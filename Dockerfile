@@ -1,13 +1,12 @@
 # syntax=docker/dockerfile:1
-FROM alpine:3.12
+FROM alpine:3.20.3
 
-RUN apt-get update 
-RUN apt-get install -y python3 python3-pip
-RUN apt-get clean
-
-RUN pip install -r requirements.txt
+RUN apk add --update py-pip
 
 COPY . /
+
+RUN pip install -r requirements.txt --break-system-packages
+
 
 EXPOSE 7878
 
