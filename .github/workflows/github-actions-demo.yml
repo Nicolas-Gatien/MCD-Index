@@ -4,8 +4,10 @@ on: [push]
 jobs:
     build:
         runs-on: ubuntu-latest
+        env: # Or as an environment variable
+            server_ip: ${{ secrets.SERVER_IP }}
         steps:
-            - run: echo ${{ secrets.SERVER_IP }}
+            - run: echo "$server_ip"
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
             - name: Check Out the Code
