@@ -9,7 +9,7 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
-            - run: docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
+            - run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
             - run: docker build -t $APP_TAG .
             - run: docker push $APP_TAG:latest
 
@@ -17,8 +17,8 @@ jobs:
         needs: build
         runs-on: ubuntu-latest
         steps:
-            - run: docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
-            - run: docker pull $APP_TAG
+            - run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
+            - run: docker pull $APP_TAG:latest
 
 
 
