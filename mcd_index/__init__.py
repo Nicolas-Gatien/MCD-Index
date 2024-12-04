@@ -9,6 +9,7 @@ class Base(DeclarativeBase):
     pass
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
 db = SQLAlchemy(model_class=Base)
 
 class Datapack(db.Model):
@@ -17,8 +18,6 @@ class Datapack(db.Model):
     path: Mapped[str] = mapped_column(unique=True)
 
 def create_app():
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
-
     from .home import home_blueprint
     app.register_blueprint(home_blueprint)
 
