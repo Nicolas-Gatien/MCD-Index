@@ -25,12 +25,10 @@ jobs:
                 username: ${{ secrets.USERNAME }}
                 key: ${{ secrets.SSH_PRIVATE_KEY }}
                 script: |
+                    docker stop $(docker ps -a -q)
+                    docker rm $(docker ps -a -q)
                     echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
                     docker pull ${{ env.APP_TAG }}:latest
-                    docker stop ${{ env.APP_TAG }}
-                    docker rm ${{ env.APP_TAG }}
-                    docker images
-                    docker rmi $(docker images -f “dangling=true” -q)
                     docker images
                     docker run -d -p 80:80 ${{ env.APP_TAG }}:latest
 # docker images
