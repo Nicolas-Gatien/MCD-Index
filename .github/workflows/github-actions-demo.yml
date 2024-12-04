@@ -1,11 +1,11 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
+env:
+    APP_TAG: ghcr.io/nicolas-gatien/mcdi
 jobs:
     build:
         runs-on: ubuntu-latest
-        env:
-            APP_TAG: ghcr.io/nicolas-gatien/mcdi
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
