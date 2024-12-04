@@ -30,7 +30,7 @@ jobs:
                     docker stop ${{ env.APP_TAG }}
                     docker rm ${{ env.APP_TAG }}
                     docker images
-                    docker rmi ${{ env.APP_TAG }}
+                    docker image prune
                     echo "Cleared IMGS"
                     docker images
                     docker run -d ${{ env.APP_TAG }}
