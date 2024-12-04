@@ -22,7 +22,7 @@ jobs:
             - run: docker pull $APP_TAG:latest
             - run: eval "$(ssh-agent)"
             - run: mkdir ~/.ssh
-            - run: echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/ssh/my_key
+            - run: echo ${{ secrets.SSH_PRIVATE_KEY }} >> ~/ssh/my_key
             - run: ssh-add ~/.ssh/my_key
             - run: ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
             - run: ssh -v ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}
