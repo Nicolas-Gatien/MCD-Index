@@ -22,9 +22,9 @@ jobs:
             - run: docker pull $APP_TAG:latest
             - name: Prepare SSH Folder
               run: |
-                    mkdir -p ~/.ssh
+                    mkdir -p ~/home/runner/.ssh
                     chmod 700 ~/.ssh
-                    ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+                    ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/home/runner/.ssh/known_hosts
             - name: Setup SSH Agent
               uses: webfactory/ssh-agent@v0.9.0
               with:
