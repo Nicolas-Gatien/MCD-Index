@@ -5,7 +5,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - run: ssh root@${{ secrets.SERVER_IP }}
+            - run: ssh -tt root@${{ secrets.SERVER_IP }}
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
             - name: Check Out the Code
