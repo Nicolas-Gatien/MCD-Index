@@ -20,8 +20,10 @@ jobs:
         steps:
             - run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
             - run: docker pull $APP_TAG:latest
-            - run: eval `ssh-agent -s`
-            - run: ssh-add ${{ secrets.SSH_PRIVATE_KEY }}
+            - run: eval "$(ssh-agent)"
+            - run: mkdir ~/.ssh
+            - run: echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/ssh/my_key
+            - run: ssh-add ~/.ssh/my_key
             - run: ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
             - run: ssh -v ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}
 
