@@ -27,8 +27,8 @@ jobs:
                 script: |
                     echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
                     docker pull $APP_TAG:latest
-                    docker stop $APP_TAG || true;
-                    docker rm $APP_TAG || true;
-                    docker run $APP_TAG
+                    docker stop mcdi || true;
+                    docker rm mcdi || true;
+                    docker run -d -p 127.0.0.1:3000:3000 --name mcdi
 
 
