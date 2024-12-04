@@ -29,7 +29,7 @@ jobs:
                     docker pull ${{ env.APP_TAG }}:latest
                     docker stop ${{ env.APP_TAG }}
                     docker rm ${{ env.APP_TAG }}
-                    docker run ${{ env.APP_TAG }}:latest
+                    docker run -d -p 80:80 ${{ env.APP_TAG }}:latest
 # docker images
 # docker image prune --force --all
 # echo "Cleared IMGS"
