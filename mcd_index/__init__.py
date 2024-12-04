@@ -3,7 +3,7 @@ from flask import Flask
 app = Flask(__name__)
 
 def create_app():
-    from .index import index_bp
-    app.register_blueprint(index_bp)
+    from .home import home_blueprint
+    app.register_blueprint(home_blueprint)
 
     return app
