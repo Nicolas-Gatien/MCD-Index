@@ -30,6 +30,6 @@ jobs:
                     docker stop ${{ env.APP_TAG }}
                     docker rm ${{ env.APP_TAG }}
                     docker images
-                    docker run --name ${{ env.APP_TAG }}
+                    docker run ${{ env.APP_TAG }}
 
 
