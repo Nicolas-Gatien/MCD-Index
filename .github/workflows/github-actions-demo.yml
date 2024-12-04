@@ -30,6 +30,6 @@ jobs:
                     docker stop mcdi
                     docker rm mcdi
                     docker images
-                    docker run -d -p 127.0.0.1:3000:3000 ${{ env.APP_TAG }} --name mcdi
+                    docker run -d -p 127.0.0.1:3000:3000 ${{ env.APP_TAG }}
 
 
