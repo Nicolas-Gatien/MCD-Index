@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is Deploying the Web App
 on: [push]
 env:
     APP_TAG: ghcr.io/nicolas-gatien/mcdi
@@ -19,6 +19,7 @@ jobs:
         steps:
             - run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
             - run: docker pull $APP_TAG:latest
+            - run: which ssh-agent
 
 
 
