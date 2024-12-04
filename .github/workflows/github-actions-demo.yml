@@ -11,8 +11,8 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v4
             - run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
-            - run: docker build -t $APP_TAG .
-            - run: docker push $APP_TAG:latest
+            - run: docker build -t ${{ env.APP_TAG }} .
+            - run: docker push ${{ env.APP_TAG }}:latest
 
     deploy:
         needs: build
@@ -26,9 +26,9 @@ jobs:
                 key: ${{ secrets.SSH_PRIVATE_KEY }}
                 script: |
                     echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
-                    docker pull $APP_TAG:latest
-                    docker stop $APP_TAG
-                    docker rm $APP_TAG
-                    docker run --name $APP_TAG
+                    docker pull ${{ env.APP_TAG }}:latest
+                    docker stop ${{ env.APP_TAG }}
+                    docker rm ${{ env.APP_TAG }}
+                    docker run --name ${{ env.APP_TAG }}
 
 
