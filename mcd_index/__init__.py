@@ -23,7 +23,7 @@ def create_app():
     from .datapack_index import index_blueprint
     app.register_blueprint(index_blueprint)
 
-    # app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
 
     db.init_app(app)
 
