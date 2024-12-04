@@ -18,13 +18,17 @@ jobs:
         needs: build
         runs-on: ubuntu-latest
         steps:
-            - run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
-            - run: docker pull $APP_TAG:latest
             - name: SSH Connections
               uses: appleboy/ssh-action@v1.2.0
               with:
                 host: ${{ secrets.SERVER_IP }}
                 username: ${{ secrets.USERNAME }}
                 key: ${{ secrets.SSH_PRIVATE_KEY }}
-                script: echo "HELLO!"
+                script: |
+                    echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
+                    docker pull $APP_TAG:latest
+                    docker stop $APP_TAG || true;
+                    docker rm $APP_TAG || true;
+                    docker run $APP_TAG
+
 
