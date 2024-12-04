@@ -30,11 +30,5 @@ jobs:
                     docker image prune -f
                     echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
                     docker pull ${{ env.APP_TAG }}:latest
-                    docker images
                     docker run -d -p 80:80 ${{ env.APP_TAG }}:latest
-# docker images
-# docker image prune --force --all
-# echo "Cleared IMGS"
-# docker images
-
 
