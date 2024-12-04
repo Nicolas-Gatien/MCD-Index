@@ -9,4 +9,4 @@ RUN pip install -r requirements.txt --break-system-packages
 
 EXPOSE 3000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:3000", "--timeout", "180", "--log-level", "info", "--access-logfile", "-", " --error-logfile", "-", "wsgi:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:3000", "--timeout", "180", "--log-level", "info", "--access-logfile", "-", "--error-logfile", "-", "wsgi:app"]
