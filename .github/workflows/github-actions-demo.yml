@@ -20,10 +20,14 @@ jobs:
         steps:
             - run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
             - run: docker pull $APP_TAG:latest
-            - name: Setup SSH
+            - name: Prepare SSH Folder
+              run: |
+                    mkdir -p ~/.ssh
+                    chmod 700 ~/.ssh
+                    ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+            - name: Setup SSH Agent
               uses: webfactory/ssh-agent@v0.9.0
               with:
                 ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-                ssh-known-hosts: ${{ secrets.SERVER_IP }}
             - run: ssh -v ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}
 
