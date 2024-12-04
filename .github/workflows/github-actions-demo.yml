@@ -9,7 +9,7 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
-            - run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
+            - run: docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
             - run: docker build -t $APP_TAG .
             - run: docker push $APP_TAG:latest
 
@@ -17,15 +17,8 @@ jobs:
         needs: build
         runs-on: ubuntu-latest
         steps:
-            - name: Download Artifact
-              uses: actions/download-artifact@v4
-              with:
-                name: mcd-index
-                path: /tmp
-            
-            - name: Load Image
-              run: |
-                docker load --input /tmp/mcd-index.tar
-                docker image ls -a
+            - run: docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
+            - run: docker pull $APP_TAG
+
 
 
