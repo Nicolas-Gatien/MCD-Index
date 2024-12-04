@@ -30,6 +30,9 @@ jobs:
                     docker stop ${{ env.APP_TAG }}
                     docker rm ${{ env.APP_TAG }}
                     docker images
-                    docker run -d -p 127.0.0.1:3000:3000 ${{ env.APP_TAG }}
+                    docker rmi ${{ env.APP_TAG }}
+                    echo "Cleared IMGS"
+                    docker images
+                    docker run -d ${{ env.APP_TAG }}
 
 
