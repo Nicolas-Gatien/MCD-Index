@@ -5,9 +5,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         env:
-            IMAGE_NAME: mcdi
-            NAMESPACE: nicolas-gatien
-            APP_TAG: ghcr.io/$NAMESPACE/$IMAGE_NAME
+            APP_TAG: ghcr.io/nicolas-gatien/mcdi
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
