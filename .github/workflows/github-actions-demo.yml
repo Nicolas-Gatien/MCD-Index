@@ -29,5 +29,6 @@ jobs:
               uses: webfactory/ssh-agent@v0.9.0
               with:
                 ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-            - run: ssh -v ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}
+            - name: SSH Connect
+              run: ssh -v ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}
 
