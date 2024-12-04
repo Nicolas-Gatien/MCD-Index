@@ -22,13 +22,15 @@ jobs:
             - run: docker pull $APP_TAG:latest
             - name: Prepare SSH Folder
               run: |
-                    mkdir -p ~/home/runner/.ssh
-                    chmod 700 ~/home/runner/.ssh
-                    ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/home/runner/.ssh/known_hosts
+                    mkdir -p ~/.ssh
+                    chmod 700 ~/.ssh
+                    ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+                    chmod 644 ~/.ssh/known_hosts
             - name: Setup SSH Agent
               uses: webfactory/ssh-agent@v0.9.0
               with:
                 ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
             - name: SSH Connect
-              run: ssh -v ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}
+              run: ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "echo 'Connected successfully'"
+
 
