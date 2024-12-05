@@ -10,6 +10,7 @@ class Base(DeclarativeBase):
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URI")
+app.config["UPLOAD_FOLDER"] = '/datapacks'
 db = SQLAlchemy(model_class=Base)
 
 class Datapack(db.Model):
