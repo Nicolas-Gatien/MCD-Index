@@ -2,8 +2,13 @@
 <html>
     <head>
         <title>Upload a Datapack</title>
+        <script src="{{ url_for('static', 'upload.js') }}"></script>
     </head>
     <body>
-        <button>Browse</button>
+        <p>Zip Your Datapack and Upload it:</p>
+        <form>
+            <input type="file" name="file">
+            <input type="submit" name="upload" value="Upload!">
+        </form>
     </body>
 </html>
