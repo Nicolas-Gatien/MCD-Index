@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 
-{% block header %}
-<title>Upload a Datapack</title>
+{% block title %}
+Upload a Datapack
 {% endblock %}
 
 {% block content %}
 <p>Zip Your Datapack and Upload it:</p>
 <form enctype="multipart/form-data" action="api/add" method="POST" id="upload-form">
     <div>
-        <label for="file">Choose file to upload</label>
+        <label for="file">Choose a datapack to upload</label>
         <input type="file" id="form-file" name="file" accept=".zip"/>
+    </div>
+    <div>
+        <label>Name your datapack</label>
+        <input id="form-id" name="id"/>
     </div>
     <div>
         <button id="form-submit">Submit</button>
