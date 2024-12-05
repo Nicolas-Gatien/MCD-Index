@@ -48,8 +48,3 @@ def add_datapack():
 @index_blueprint.route('/upload')
 def upload_datapack():
     return render_template('upload.html')
-
-@index_blueprint.route('/list')
-def list_datapacks():
-    datapacks = db.session.execute(db.select(Datapack).order_by(Datapack.name)).scalars().all()
-    return render_template('list.html', datapacks=datapacks)
