@@ -1,27 +1,18 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Upload a Datapack</title>
-    </head>
-    <body>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-        {% endwith %}
-        <p>Zip Your Datapack and Upload it:</p>
-        <form enctype="multipart/form-data" action="api/add" method="POST" id="upload-form">
-            <div>
-                <label for="file">Choose file to upload</label>
-                <input type="file" id="form-file" name="file" accept=".zip"/>
-            </div>
-            <div>
-                <button id="form-submit">Submit</button>
-            </div>
-        </form>          
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block header %}
+<title>Upload a Datapack</title>
+{% endblock %}
+
+{% block content %}
+<p>Zip Your Datapack and Upload it:</p>
+<form enctype="multipart/form-data" action="api/add" method="POST" id="upload-form">
+    <div>
+        <label for="file">Choose file to upload</label>
+        <input type="file" id="form-file" name="file" accept=".zip"/>
+    </div>
+    <div>
+        <button id="form-submit">Submit</button>
+    </div>
+</form>          
+{% endblock %}
