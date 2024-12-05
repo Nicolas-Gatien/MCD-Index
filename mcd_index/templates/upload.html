@@ -2,13 +2,26 @@
 <html>
     <head>
         <title>Upload a Datapack</title>
-        <script src="{{ url_for('static', 'upload.js') }}"></script>
     </head>
     <body>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
         <p>Zip Your Datapack and Upload it:</p>
-        <form>
-            <input type="file" name="file">
-            <input type="submit" name="upload" value="Upload!">
-        </form>
+        <form enctype="multipart/form-data" action="api/add" method="POST" id="upload-form">
+            <div>
+                <label for="file">Choose file to upload</label>
+                <input type="file" id="form-file" name="file" multiple />
+            </div>
+            <div>
+                <button id="form-submit">Submit</button>
+            </div>
+        </form>          
     </body>
 </html>

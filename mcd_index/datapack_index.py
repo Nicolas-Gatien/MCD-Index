@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, current_app
+from flask import Blueprint, render_template, request, flash, redirect, current_app, url_for
 from werkzeug.utils import secure_filename
 import os
 
@@ -14,18 +14,20 @@ def get_datapack():
 
 @index_blueprint.route('/api/add', methods=['POST'])
 def add_datapack():
+    print(request.files)
+
     if 'file' not in request.files:
         flash('No file part')
-        return redirect(request.url)
+        return redirect(url_for('datapack_index.upload_datapack'))
     file = request.files['file']
 
     if file.filename == '':
         flash('No file selected')
-        return redirect(request.url)
+        return redirect(url_for('datapack_index.upload_datapack'))
     
     if not is_archive(file.filename):
         flash('Upload a zipped folder')
-        return redirect(request.url)
+        return redirect(url_for('datapack_index.upload_datapack'))
     
     filename = secure_filename(file.filename)
     file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
