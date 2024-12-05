@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+List All Packs
+{% endblock %}
+
+{% block content %}
+<ul>
+{% for pack in datapacks %}
+<li>{{ pack.name }}: {{ pack.path }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

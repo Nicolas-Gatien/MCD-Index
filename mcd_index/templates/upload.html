@@ -9,11 +9,11 @@ Upload a Datapack
 <form enctype="multipart/form-data" action="api/add" method="POST" id="upload-form">
     <div>
         <label for="file">Choose a datapack to upload</label>
-        <input type="file" id="form-file" name="file" accept=".zip"/>
+        <input type="file" id="form-file" name="file" accept=".zip" required/>
     </div>
     <div>
         <label>Name your datapack</label>
-        <input id="form-id" name="id"/>
+        <input id="form-id" name="id" required/>
     </div>
     <div>
         <button id="form-submit">Submit</button>
