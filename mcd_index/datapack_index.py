@@ -14,8 +14,9 @@ def is_archive(filename):
 def get_datapack(name: str):
     datapack: Datapack = Datapack.query.filter_by(idname=name).first()
     print(f"{datapack.idname}: {datapack.filename}")
-    
-    return send_file(os.path.join(current_app.config['UPLOAD_FOLDER'], datapack.filename), as_attachment=True)
+
+    path = os.path.join(current_app.config['UPLOAD_FOLDER'], datapack.filename)
+    return send_file(os.path.abspath(path), as_attachment=True)
 
 @index_blueprint.route('/api/add', methods=['POST'])
 def add_datapack():
@@ -36,7 +37,6 @@ def add_datapack():
     datapack_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     print(datapack_path)
     datapack_name = request.form['id']
-    print(f"{datapack_name}: {datapack_path}")
     file.save(datapack_path)
     datapack: Datapack = Datapack(
         idname=datapack_name,
