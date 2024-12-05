@@ -1,4 +1,5 @@
 /venv
 /instance
+/datapacks
 __pycache__
 .env
