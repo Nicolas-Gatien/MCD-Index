@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, current_app, url_for
+from flask import Blueprint, render_template, request, flash, redirect, current_app, url_for, send_file
 from werkzeug.utils import secure_filename
 import os
 
@@ -10,9 +10,12 @@ def is_archive(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() == 'zip'
 
-@index_blueprint.route('/api/get', methods=['GET'])
-def get_datapack():
-    return "Get Datapack"
+@index_blueprint.route('/api/get/<string:name>', methods=['GET'])
+def get_datapack(name: str):
+    datapack: Datapack = Datapack.query.filter_by(idname=name).first()
+    print(f"{datapack.idname}: {datapack.filename}")
+    
+    return send_file(os.path.join(current_app.config['UPLOAD_FOLDER'], datapack.filename), as_attachment=True)
 
 @index_blueprint.route('/api/add', methods=['POST'])
 def add_datapack():
@@ -31,12 +34,13 @@ def add_datapack():
     
     filename = secure_filename(file.filename)
     datapack_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+    print(datapack_path)
     datapack_name = request.form['id']
     print(f"{datapack_name}: {datapack_path}")
     file.save(datapack_path)
     datapack: Datapack = Datapack(
-        name=datapack_name,
-        path=datapack_path
+        idname=datapack_name,
+        filename=filename
     )
     db.session.add(datapack)
     db.session.commit()
