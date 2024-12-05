@@ -1,6 +1,9 @@
 name: Deploy App
 run-name: ${{ github.actor }} is Deploying the Web App
-on: [push]
+on:
+  push:
+    branches:
+      - main
 env:
     APP_TAG: ghcr.io/nicolas-gatien/mcdi
     PAT: ${{ secrets.PAT }}

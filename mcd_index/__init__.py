@@ -4,6 +4,12 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String
 
 import os
+from dotenv import load_dotenv
+
+if os.path.isfile('.env'):
+    load_dotenv()
+else:
+    print("Using Server Env")
 
 class Base(DeclarativeBase):
     pass
