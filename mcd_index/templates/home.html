@@ -7,4 +7,9 @@
 {% block content %}
 <p>Welcome to the Minecraft Datapack Index</p>
 <p><a href="/upload">Upload</a> your datapack!</p>
+<ul>
+    {% for pack in datapacks %}
+    <li>{{ pack.idname }}: {{ pack.filename }}</li>
+    {% endfor %}
+</ul>
 {% endblock %}

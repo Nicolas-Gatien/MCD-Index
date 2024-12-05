@@ -22,8 +22,8 @@ db = SQLAlchemy(model_class=Base)
 
 class Datapack(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(unique=True)
-    path: Mapped[str] = mapped_column(unique=True)
+    idname: Mapped[str] = mapped_column(unique=True)
+    filename: Mapped[str] = mapped_column(unique=True)
 
 def create_app():
     from .home import home_blueprint
